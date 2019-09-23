@@ -20,17 +20,7 @@
 <script>
 
 export default {
- data() {
-   return {
-     product: {
-       img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBAEl-o3DlTrkowtkmkS_jleLKgsU2joon0yItwotCm82iMtPZ',
-       title: 'MacBook',
-       description: 'Il y a de nouvelles raisons de s’éprendre du Mac le plus populaire au monde. Disponible en argent, gris sidéral et or, le nouveau MacBook Air, plus fin et plus léger',
-       price: '1500 €'
-
-     }
-   }
- }
+ props: ['product']
 }
 </script>
 
