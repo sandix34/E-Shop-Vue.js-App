@@ -12,15 +12,21 @@
     </div>
     <div>
       <span>{{ product.price }}</span>
-      <button class="btn btn-primary btn-sm float-right">Commander</button>
+      <button @click="addProductToCart" class="btn btn-primary btn-sm float-right">Commander</button>
     </div>
   </div>
 </template>
 
 <script>
+import { eventBus } from '../../main';
 
 export default {
- props: ['product']
+ props: ['product'],
+ methods: {
+   addProductToCart() {
+     eventBus.addProductToCart({ ...this.product })
+   }
+ }
 }
 </script>
 

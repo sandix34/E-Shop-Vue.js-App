@@ -1,14 +1,23 @@
 <template>
-  <div class="d-flex flex-row justify-content-between px-5 p-2" >
-    <span>{{ item.title }}</span>
+  <div class="d-flex flex-row justify-content-between p-2" >
+    <span style="width:130px;">{{ item.title }}</span>
     <span><strong>{{ item.price }} €</strong></span>
+    <button class="close" @click="removeItemFromCart">
+      <span>&times;</span>
+    </button>
   </div>
 </template>
 
 <script>
+import { eventBus } from '../../main'
 
 export default {
- props: ['item']
+ props: ['item'],
+ methods: {
+   removeItemFromCart() {
+     eventBus.removeItemFromCart({ ...this.item });
+   }
+ }
 }
 </script>
 
