@@ -50,7 +50,7 @@ export const eventBus = new Vue({
       }
     ],
     cart: [],
-    page:'User'
+    page:'Admin'
   },
   methods: {
     addProductToCart(product) {
