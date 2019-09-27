@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" >
-      <img src="../assets/logo.png" alt="logo" width="30" height="30"/>
+    <a class="navbar-brand">
+      <img src="../assets/logo.png" alt="logo" width="30" height="30" />
       Vue-Shop
     </a>
     <button class="navbar-toggler">
@@ -10,10 +10,18 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" :class="{ active: page === 'User' }" @click="changePage('User')">Boutique</a>
+          <a
+            class="nav-link"
+            :class="{ active: page === 'User' }"
+            @click="changePage('User')"
+          >Boutique</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" :class="{ active: page === 'Admin' }" @click="changePage('Admin')">Admin</a>
+          <a
+            class="nav-link"
+            :class="{ active: page === 'Admin' }"
+            @click="changePage('Admin')"
+          >Admin</a>
         </li>
       </ul>
     </div>
@@ -29,12 +37,16 @@ export default {
       page: eventBus.page
     }
   },
- methods: {
-   changePage(page) {
-     eventBus.changePage(page);
-     this.page = page;
-   }
- }
+  methods: {
+    changePage(page) {
+      eventBus.changePage(page);
+    }
+  },
+  created() {
+    eventBus.$on('update:page', (page) => {
+      this.page = page;
+    })
+  }
 }
 </script>
 

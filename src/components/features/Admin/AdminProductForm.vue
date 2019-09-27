@@ -21,12 +21,12 @@
     <ul v-if="errors.length">
       <li class="text-danger" v-for="error in errors" :key="error">{{ error }}</li>  
     </ul>
-    <pre>{{ $data }}</pre>
     <button class="btn btn-primary">Ajouter</button>
   </form>
 </template>
 
 <script>
+import { eventBus } from '../../../main';
 export default {
   data() {
     return {
@@ -35,7 +35,6 @@ export default {
         title: '',
         description: '',
         price: ''
-
       },
       errors: []
     }
@@ -44,10 +43,21 @@ export default {
     trySubmit(e) {
       e.preventDefault();
       if (this.formIsValid()) {
-        console.log(this.form);
+        eventBus.addProduct({ ...this.form });
+        this.resetForm();
+        eventBus.changePage('User');
       }
     },
+    resetForm() {
+      this.form = {
+        img: '',
+        title: '',
+        description: '',
+        price: ''
+      };
+    },
     formIsValid() {
+      this.errors = [];
       if (!this.form.img) {
         this.errors.push('img required');
       }
@@ -63,7 +73,7 @@ export default {
       return this.errors.length ? false : true;
     }
   }
-};
+}
 </script>
 
 <style>
