@@ -1,24 +1,22 @@
 <template>
   <div id="app">
     <the-header></the-header>
-    <div class="d-flex flex-row">
-      <Shop class="w-75"></Shop>
-      <Cart class="w-25"></Cart>
-    </div>
+    <user></user>
+    <admin></admin>
   </div>
 </template>
 
 <script>
 import TheHeader from './components/TheHeader';
-import Shop from './components/Shop/Shop';
-import Cart from './components/Cart/Cart';
+import User from './components/features/User/User';
+import Admin from './components/features//Admin/Admin'
 
 export default {
   name: 'app',
   components: {
     TheHeader,
-    Shop,
-    Cart
+    User,
+    Admin
   }
 }
 </script>
