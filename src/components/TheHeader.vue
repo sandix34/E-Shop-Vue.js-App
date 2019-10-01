@@ -5,9 +5,9 @@
       Vue-Shop
     </a>
     <button class="navbar-toggler">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon" v-trigger-collapse="'collapse'"></span>
     </button>
-    <div class="collapse navbar-collapse">
+    <div id="collapse" class="collapse navbar-collapse">
       <ul class="navbar-nav">
         <li class="nav-item">
           <a
@@ -46,6 +46,27 @@ export default {
     eventBus.$on('update:page', (page) => {
       this.page = page;
     })
+  },
+  directives: {
+    triggerCollapse: {
+      inserted(el, binding) {
+        // fermeture du menu lors d'un click en dehors de l'icône menu
+        window.addEventListener('click', () => {
+          nav.classList.remove('show');
+        })
+        // Remplace le javaScript de Bootstrap pour déplier le menu déroulant
+        const nav = document.querySelector(`#${ binding.value }`);
+        el.addEventListener('click', (e) => {
+          if (nav.classList.contains('show')) {
+            nav.classList.remove('show');
+          } else {
+            nav.classList.add('show');
+          }
+          e.stopPropagation();
+        })
+        console.log({ nav });
+      }
+    }
   }
 }
 </script>
