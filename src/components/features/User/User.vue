@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-row">
     <transition name="left" appear>
-      <Shop class="w-75"></Shop>
+      <Shop :products="products" class="w-75"></Shop>
     </transition>
     <transition name="right" appear>
       <Cart class="w-25"></Cart>
@@ -12,12 +12,21 @@
 <script>
 import Shop from './Shop/Shop';
 import Cart from './Cart/Cart';
+import { mapState } from 'vuex';
 
 export default {
   components: {
       Shop,
       Cart
-  }  
+  },
+  computed: {
+    ...mapState('products', {
+      products: 'datas'
+    })
+  },
+  created() {
+    this.$store.dispatch('product/fetchDatas');
+  }
 };
 </script>
 

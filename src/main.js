@@ -3,6 +3,7 @@ import App from './App.vue'
 import * as Filters from './utils/filters'
 import router from './router';
 import axios from 'axios';
+import store from './store/store';
 
 Vue.config.productionTip = false
 axios.defaults.baseURL = 'https://boutique-3c990.firebaseio.com/';
@@ -13,10 +14,6 @@ Object.keys(Filters).forEach( (f) => {
 })
 
 export const eventBus = new Vue({
-  data: {
-    products: [],
-    cart: []
-  },
   methods: {
     addProductToCart(product) {
       if (!this.cart.map( i => i.id).includes(product.id)) {
@@ -35,24 +32,11 @@ export const eventBus = new Vue({
                   this.$emit('update:products', this.products);
                 })
     },
-    addProducts(products) {
-      this.products = products;
-      this.$emit('update:products', this.products);
-    },
-    initProducts() {
-      this.$http.get('products.json')
-                .then( res => {
-                  const data = res.data;
-                  this.addProducts(Object.keys(data).map( key => data[key]));
-                });
-    }
   },
-  created() {
-    this.initProducts();
-  }
 })
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')
