@@ -12,6 +12,9 @@ const product = {
 		datas: [],
 	},
 	mutations: {
+		addOne(state, product) {
+			state.datas.push(product);
+		},
 		addMany(state, products) {
 			state.datas = products
 		}
@@ -21,8 +24,14 @@ const product = {
 			axios.get('products.json')
 				.then(res => {
 					const data = res.data;
-					context.commit('addMany', Object.keys(data).map(key => data[ke]))
+					context.commit('addMany', Object.keys(data).map(key => data[key]))
 				});
+		},
+		saveOne(context, product) {
+			axios.post('products.json', product)
+				.then( () => {
+					context.commit('addOne', product);
+				})
 		}
 	}
 }
@@ -45,14 +54,14 @@ const cart = {
 			state.datas.push(product);
 		},
 		deleteOne(state, id) {
-			const index = state.datas.findIndex( d => d.id === id);
+			const index = state.datas.findIndex(d => d.id === id);
 			state.datas.splice(index, 1);
 		}
 	}
 }
 
 // configurer le store
-const store = Vuex.store({
+const store = new Vuex.Store({
 	modules: {
 		product,
 		cart,

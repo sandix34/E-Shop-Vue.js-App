@@ -13,28 +13,6 @@ Object.keys(Filters).forEach( (f) => {
   Vue.filter(f, Filters[f]);
 })
 
-export const eventBus = new Vue({
-  methods: {
-    addProductToCart(product) {
-      if (!this.cart.map( i => i.id).includes(product.id)) {
-        this.cart = [...this.cart, product];
-        this.$emit('update:cart', this.cart.slice());
-      }
-    },
-    removeItemFromCart(item) {
-      this.cart = this.cart.slice().filter( i => i.id !== item.id );
-      this.$emit('update:cart', this.cart.slice());
-    },
-    addProduct(product) {
-      this.$http.post('products.json', product)
-                .then( res => {
-                  this.products = [ ...this.products, { ...product, id: this.products.length + 1 + '' }],
-                  this.$emit('update:products', this.products);
-                })
-    },
-  },
-})
-
 new Vue({
   router,
   store,

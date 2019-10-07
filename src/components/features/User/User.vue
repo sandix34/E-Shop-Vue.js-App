@@ -20,7 +20,7 @@ export default {
       Cart
   },
   computed: {
-    ...mapState('products', {
+    ...mapState('product', {
       products: 'datas'
     }),
     ...mapState('cart', {
