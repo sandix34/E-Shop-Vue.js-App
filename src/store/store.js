@@ -31,6 +31,23 @@ const cart = {
 	namespaced: true,
 	state: {
 		datas: [],
+	},
+	getters: {
+		total(state) {
+			return state.datas.reduce((acc, p) => {
+				acc += p.price
+				return acc;
+			}, 0);
+		}
+	},
+	mutations: {
+		addOne(state, product) {
+			state.datas.push(product);
+		},
+		deleteOne(state, id) {
+			const index = state.datas.findIndex( d => d.id === id);
+			state.datas.splice(index, 1);
+		}
 	}
 }
 
@@ -41,3 +58,5 @@ const store = Vuex.store({
 		cart,
 	}
 })
+
+export default store;

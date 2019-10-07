@@ -4,7 +4,7 @@
       <Shop :products="products" class="w-75"></Shop>
     </transition>
     <transition name="right" appear>
-      <Cart class="w-25"></Cart>
+      <Cart :cart="cart" class="w-25"></Cart>
     </transition>
   </div>
 </template>
@@ -22,6 +22,9 @@ export default {
   computed: {
     ...mapState('products', {
       products: 'datas'
+    }),
+    ...mapState('cart', {
+      cart: 'datas'
     })
   },
   created() {
